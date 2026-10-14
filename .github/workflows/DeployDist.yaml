@@ -19,10 +19,19 @@ jobs:
           node-version: 24
       - name: Check node version
         run: node --version
-      - name: Install dependencies
-        run: |
-          cd node-backend-app
-          npm ci
+
+      - name: Cache Dependencies
+        id: cache-deps
+        uses: threeal/cache-action@v1.0.0
+        with:
+          key: node-deps
+          version: ${{ hashFiles('package-lock.json') }}
+          files: node_modules
+
+      - name: Install Dependencies
+        if: steps.cache-deps.outputs.restored == 'false'
+        run: npm install
+
       - name: Run Tests
         run: |
           cd node-backend-app
