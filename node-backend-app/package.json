@@ -4,9 +4,11 @@
   "description": "Simple Node.js Express backend",
   "main": "server.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "vtest": "^1.1.0"
   }
 }
