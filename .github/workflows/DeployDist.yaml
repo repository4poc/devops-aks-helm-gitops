@@ -2,6 +2,9 @@ name: Deployment Pipeline
 
 on:
   push:
+    branches:
+      - main
+      - 'features/**''
   workflow_dispatch:
 
 permissions:
