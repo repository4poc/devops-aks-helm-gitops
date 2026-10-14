@@ -19,9 +19,6 @@ jobs:
           cache: npm
           cache-dependency-path: node-backend-app/package-lock.json
 
-      - name: Check Node Version
-        run: node --version
-
       - name: Install Dependencies
         working-directory: node-backend-app
         run: npm ci
@@ -45,8 +42,9 @@ jobs:
           cache: npm
           cache-dependency-path: node-backend-app/package-lock.json
 
-      - name: Check Node Version
-        run: node --version
+      - name: Install Dependencies
+        working-directory: node-backend-app
+        run: npm ci
 
       - name: Install Dependencies
         working-directory: node-backend-app
