@@ -115,6 +115,7 @@ jobs:
           file: ./node-frontend-app/Dockerfile
           push: true
           tags: |
+            ${{ steps.image-meta.outputs.image }}:latest
             ${{ steps.image-meta.outputs.image }}:${{ github.sha }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
