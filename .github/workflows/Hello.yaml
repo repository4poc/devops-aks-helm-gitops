@@ -1,0 +1,10 @@
+name: Hello Workflow
+on: push
+jobs:
+  Say-Hello-Job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: echo "hello"
+      - name: Say Bye
+        run: echo "hello"
