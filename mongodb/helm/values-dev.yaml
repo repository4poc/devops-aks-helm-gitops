@@ -1,0 +1,7 @@
+#architecture="standalone"
+architecture: replicaset
+useStatefulSet: true
+replicaCount: 2
+auth:
+  rootuser: admin
+  rootPassword: admin123

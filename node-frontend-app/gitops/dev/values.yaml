@@ -1,0 +1,13 @@
+sources:
+  # Helm chart from ACR
+  - repoURL: oci://acrcompanyplatform.azurecr.io/helm
+    chart: node-frontend-app
+    targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - $values/gitops/dev/values.yaml
+
+  # Same Git repository, used for values
+  - repoURL: https://github.com/company/node-frontend-app.git
+    targetRevision: main
+    ref: values

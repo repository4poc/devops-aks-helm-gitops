@@ -1,0 +1,16 @@
+{
+  "name": "node-frontend-app",
+  "version": "1.0.0",
+  "description": "This is NodeJS and Express based Frontend application",
+  "license": "ISC",
+  "author": "varinder_gupta82@yahoo.com",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
