@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: node-frontend-app
-          image: varinder2284/node-frontend-app:2.0
+          image: varinder2284/node-frontend-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

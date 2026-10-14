@@ -1,6 +1,9 @@
 image:
-  repository: myregistry.azurecr.io/node-frontend-app
-  tag: ""
+  repository: varindergupta/node-frontend-app
+  tag: "latest"
+  pullPolicy: Always
+
+replicaCount: 2  
 
 service:
   type: ClusterIP
@@ -17,3 +20,5 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
+
+    
