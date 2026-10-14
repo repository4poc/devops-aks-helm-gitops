@@ -2,12 +2,14 @@ name: Deployment Pipeline
 
 on:
   workflow_dispatch:
+
   push:
     branches:
       - main
       - 'features/**'
     paths-ignore:
-      - Readme.md
+      - 'Readme.md'
+      - 'readme.md'
 
 permissions:
   contents: read
