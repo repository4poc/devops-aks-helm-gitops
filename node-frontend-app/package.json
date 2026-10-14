@@ -8,7 +8,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "build": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist');fs.copyFileSync('server.js','dist/server.js');fs.copyFileSync('package.json','dist/package.json')\"",
+    "build": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/server.js','dist/server.js');fs.copyFileSync('package.json','dist/package.json');fs.cpSync('public','dist/public',{recursive:true})\"",
     "dev": "node src/server.js",
     "test": "node --test"
   },
