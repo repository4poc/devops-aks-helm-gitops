@@ -28,6 +28,7 @@ jobs:
           cd node-backend-app
           npm test
   Build-Job:
+    needs: Test-Job
     runs-on: ubuntu-latest
     steps:
       #      - name: Get Code
