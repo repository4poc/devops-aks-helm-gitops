@@ -1,0 +1,11 @@
+name: Depoy Dist
+#on: push
+on: workflow_dispatch
+jobs:
+  Test-Job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        run: |
+          git clone https://github.com/repository4poc/devops-aks-helm-gitops Readme.md
+          ls
