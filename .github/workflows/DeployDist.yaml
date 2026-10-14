@@ -1,6 +1,6 @@
 name: Deployment Pipeline
-#on: push
-on: workflow_dispatch
+on: push
+#on: workflow_dispatch
 jobs:
   Test-Job:
     runs-on: ubuntu-latest
@@ -28,13 +28,9 @@ jobs:
           cd node-backend-app
           npm test
   Build-Job:
-    needs: Test-Job
+    needs: [Test-Job]
     runs-on: ubuntu-latest
     steps:
-      #      - name: Get Code
-      #        run: |
-      #          git clone https://github.com/repository4poc/devops-aks-helm-gitops Readme.md
-      #          ls
       - name: Get Code
         uses: actions/checkout@v7
       - name: Check Code
@@ -49,7 +45,7 @@ jobs:
         run: |
           cd node-backend-app
           npm ci
-      - name: Run Tests
+      - name: Build Project
         run: |
           cd node-backend-app
           npm run build
