@@ -16,5 +16,5 @@ test('multiplication: 4 * 3 = 12', () => {
 });
 
 test('addition with negative numbers', () => {
-  assert.equal(add(-2, -3), -4);
+  assert.equal(add(-2, -3), -5);
 });
