@@ -110,7 +110,7 @@ jobs:
           CHART_VERSION=$(helm show chart ./node-frontend-app/helm | awk '/^version:/ {print $2}')
 
           helm push "dist/${CHART_NAME}-${CHART_VERSION}.tgz" \
-            oci://registry-1.docker.io/varindergupta
+          oci://registry-1.docker.io/varindergupta
 
           echo "### Helm chart published" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
