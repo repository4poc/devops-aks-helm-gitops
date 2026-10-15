@@ -67,9 +67,15 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   helm-validation:
-    name: Validate and Package Helm Chart
+    name: Validate, Package and Publish Helm Chart
     needs: frontend-ci
     runs-on: ubuntu-latest
+
+    # Publish the chart only from main after CI succeeds.
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' ||
+       github.event_name == 'workflow_dispatch')
 
     steps:
       - name: Checkout
@@ -81,12 +87,35 @@ jobs:
       - name: Validate Helm Chart
         run: |
           helm lint ./node-frontend-app/helm
-          helm template node-frontend-app ./node-frontend-app/helm
+          helm template frontend ./node-frontend-app/helm
 
       - name: Package Helm Chart
         run: |
           mkdir -p dist
           helm package ./node-frontend-app/helm --destination dist
+          ls -lh dist/
+
+      - name: Login to Docker Hub OCI Registry
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          echo "$DOCKERHUB_TOKEN" | helm registry login registry-1.docker.io \
+            --username "$DOCKERHUB_USERNAME" \
+            --password-stdin
+
+      - name: Push Helm Chart to Docker Hub
+        run: |
+          CHART_NAME=$(helm show chart ./node-frontend-app/helm | awk '/^name:/ {print $2}')
+          CHART_VERSION=$(helm show chart ./node-frontend-app/helm | awk '/^version:/ {print $2}')
+
+          helm push "dist/${CHART_NAME}-${CHART_VERSION}.tgz" \
+            oci://registry-1.docker.io/varindergupta
+
+          echo "### Helm chart published" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- OCI reference: \`oci://registry-1.docker.io/varindergupta/${CHART_NAME}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Version: \`${CHART_VERSION}\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload Helm Chart Artifact
         uses: actions/upload-artifact@v4
