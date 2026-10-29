@@ -1,0 +1,15 @@
+name: node-app-ingress-service
+namespace: apps
+ingress:
+  enabled: True
+  ingressClassName: nginx
+  rules:
+    - host: adecba8bac0b44f889f4680dbfcb4972-a3e706197f8dabcb.elb.eu-north-1.amazonaws.com
+      path: /
+      service:
+        name: node-frontend-app-servvice
+      port: 3000
+    - path: /ap1
+      service:
+        name: node-backend-api-service
+      port: 3001

@@ -17,14 +17,15 @@ spec:
     spec:
       containers:
         - name: node-frontend-app
-          image: varinder2284/node-frontend-app:latest
+          #image: '{{ .Values.image.repository }}@{{ .Values.image.digest }}'
+          image: 'varindergupta/node-frontend-app@sha256:6fa6d7db36a9aec2f9e20d309308ab40732736eb572db5237b137398a4aff9fc'
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
 
           livenessProbe:
             httpGet:
-              path: /health
+              path: /health #/health
               port: 3000
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -33,7 +34,7 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: /ready
+              path: /ready #/ready
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 5
@@ -42,9 +43,8 @@ spec:
 
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: '100m'
+              memory: '128Mi'
             limits:
-              cpu: "500m"
-              memory: "512Mi"
-
+              cpu: '500m'
+              memory: '512Mi'

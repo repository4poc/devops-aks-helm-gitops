@@ -1,6 +1,6 @@
 image:
   repository: varindergupta/node-frontend-app
-  tag: "latest"
+  digest: ""
   pullPolicy: Always
 
 replicaCount: 2  

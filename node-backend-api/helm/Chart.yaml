@@ -1,0 +1,6 @@
+apiVersion: v2
+name: Ingress
+description: A Helm chart for a ingress Nginx
+type: application # library
+version: 1.0.0 # Chart Version - Changes with Helm files changes
+appVersion: '2.0.0' # Application Version - Changes with Application Image changes

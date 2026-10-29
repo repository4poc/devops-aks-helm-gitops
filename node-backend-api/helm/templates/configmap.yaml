@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: node-backend-app-configmap
+  namespace: {{.Values.namespace}}
+data:
+  MONGO_INITDB_ROOT_USERNAME: admin

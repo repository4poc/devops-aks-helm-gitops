@@ -1,0 +1,9 @@
+name: node-backend-app
+namespace: apps
+replicas: 3
+podLabels:
+  name: node-backend-app
+  component: backend
+container:
+  image: varindergupta/node-backend-api@sha256:5fe16f238d36cc704c455593224fa401347f64994832e16773f1202767bbfb0a
+  port: 3001

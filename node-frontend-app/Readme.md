@@ -43,7 +43,7 @@ docker build -t node-frontend-app:1.0 .
 ## Tag Image
 
 ```
-docker tag node-frontend-app:2.0 varinder2284/node-frontend-app:1.0
+docker tag node-frontend-app:2.0 varinder2284/node-frontend-app:2.0
 ```
 
 ## Publish Image
@@ -76,7 +76,19 @@ kubectl rollout undo deployment/node-frontend-app -n apps
    Install the Helm release
 
    ```
-   helm install node-frontend-app ./node-frontend-app -n apps --create-namespace
+   helm package node-front-app/helm/ -d helm-packages/
+
+   helm install node-frontend-app helm-packages/node-frontend-app-1.1.0.tgz -n apps --create-namespace
+
+   helm upgrade node-frontend-app helm-packages/node-frontend-app-1.1.0.tgz -n apps --create-namespace
+
+
+
+   helm list -n apps
+
+   $ helm status node-frontend-app -n apps
+
+   $ kubectl port-forward service/node-frontend-app-servvice -n apps 3000:3000
    ```
 
    Upgrade / rollout a new image
@@ -122,6 +134,14 @@ kubectl rollout undo deployment/node-frontend-app -n apps
 
    ```
    helm rollback node-frontend-app 1 -n apps
+   ```
+
+   ```
+   kubectl rollout history deployment/node-frontend-app -n apps
+
+
+   kubectl rollout undo deployment/node-frontend-app --to-revision=1 -n apps
+
    ```
 
    Kubernetes will pull latest when a new Pod starts. However, pushing a new latest image to Docker Hub does not by itself create a Kubernetes rollout.

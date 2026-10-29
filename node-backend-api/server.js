@@ -18,11 +18,22 @@ app.get('/api/health', (req, res) => {
 // Welcome API
 app.get('/api', (req, res) => {
   res.json({
-    message: 'Welcome to Node.js Backend API',
-    version: '1.0.0',
+    message: 'Welcome to Node.js Backend API (version 2.0)',
+    version: '2.0.0',
   });
 });
 
+// Welcome API
+app.get('/db', (req, res) => {
+  res.json({
+    message: `${process.env.MONGODBURI}`,
+    version: '1.0.1',
+  });
+
+  console.log(
+    `Connected to DB: ${process.env.MONGODBURI ? 'URI configured' : 'URI missing'}`,
+  );
+});
 // Users API
 app.get('/api/users', (req, res) => {
   res.json({
@@ -80,4 +91,9 @@ app.post('/api/message', (req, res) => {
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+app.get('crash', (req, res) => {
+  res.send('Server is crashing..');
+  setTimeout(() => process.exit(1), 100);
 });
